@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+    </head>
+    <body>
+        <h1><%= title %></h1>
+        <% if (currentUser) { %>
+        <h2>Welcome back, <%= currentUser.username %></h2>
+        <p>Membership status: <%= currentUser.membershipStatus %></p>
+        <% if (currentUser.admin) { %>
+        <p>You are an admin.</p>
+        <% } %>
+        <a href="/log-out">Log out</a>
+        <br />
+        <a href="/post/create">Create Post</a>
+        <% if (currentUser.membershipStatus === "guest") { %>
+        <br />
+        <a href="/membership">Become a member...</a>
+        <% } %> <% } else { %>
+        <p>Log in or create account</p>
+        <a href="/log-in">Log in</a>
+        <br />
+        <a href="/sign-up">Sign up</a>
+        <% } %> <% if (posts) { %> <% posts.forEach(post => { %>
+        <div>
+            <h2><%= post.title %></h2>
+            <p><%= post.body %></p>
+            <p>
+                Posted by: <% if (currentUser?.membershipStatus === "member") {
+                %> <%= post.creator.username %> <% } else { %> anonymous <% } %>
+            </p>
+            <p>
+                Date: <% if (currentUser?.membershipStatus === "member") { %>
+                <%= post.timestamp.toLocaleDateString('en-us', {
+                year:"numeric",month:"short", day:"numeric"}) %> <% } else { %>
+                unknown <% } %>
+            </p>
+            <% if (currentUser?.admin) { %>
+            <a href="<%= `/post/delete/${post._id}` %>">Delete post</a>
+            <% } %>
+        </div>
+        <% }); %> <% } %>
+    </body>
+</html>

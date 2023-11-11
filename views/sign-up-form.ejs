@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <title>Sign up</title>
+    </head>
+    <body>
+        <h1>Sign up</h1>
+        <form action="" method="post">
+            <label for="username">Username</label>
+            <input
+                type="text"
+                name="username"
+                value="<%= (formdata === null) ? '' : formdata.username %>"
+                required="true"
+            />
+            <br />
+            <label for="password"> Password </label>
+            <input type="password" name="password" required="true" />
+            <br />
+            <label for="passwordConfirmation"> Password Confirmation </label>
+            <input
+                type="password"
+                name="passwordConfirmation"
+                required="true"
+            />
+            <br />
+            <label for="admin">Admin</label>
+            <input type="checkbox" name="admin" <%= (formdata === null) ? '' :
+            (formdata.admin) ? 'checked' : '' %> />
+            <button type="submit">Submit</button>
+        </form>
+
+        <% if (errors) { %>
+        <ul>
+            <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+            <% }); %>
+        </ul>
+        <% } %>
+    </body>
+</html>

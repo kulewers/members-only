@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <title>Delete Post</title>
+    </head>
+    <body>
+        <h1>Are you sure you want to delete this post?</h1>
+        <h2><%= post.title %></h2>
+        <p><%= post.body %></p>
+        <p>Posted by: <%= post.creator.username %></p>
+        <p>
+            Date: <%= post.timestamp.toLocaleDateString('en-us', {
+            year:"numeric",month:"short", day:"numeric"}) %>
+        </p>
+        <form action="" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    </body>
+</html>

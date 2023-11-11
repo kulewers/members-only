@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <title>Membership</title>
+    </head>
+    <body>
+        <h1>Becoming Member</h1>
+        <form action="" method="post">
+            <label for="secretCode">Secret Code:</label>
+            <input
+                type="text"
+                name="secretCode"
+                required="true"
+                value="<%= (formdata === null) ? '' : formdata.secretCode %>"
+            />
+            <br />
+            <button type="submit">Become member...</button>
+        </form>
+
+        <% if (errors) { %>
+        <ul>
+            <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+            <% }); %>
+        </ul>
+        <% } %>
+    </body>
+</html>

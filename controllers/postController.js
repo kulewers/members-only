@@ -4,15 +4,20 @@ const { body, validationResult } = require("express-validator");
 
 const asyncHandler = require("express-async-handler");
 
-exports.post_create_get = asyncHandler(async (req, res, next) => {
-    if (!req.user) {
-        res.redirect("/log-in");
-    }
-    res.render("post-form", {
-        post: null,
-        errors: null,
-    });
-});
+exports.post_create_get = [
+    (req, res, next) => {
+        if (!req.user) {
+            res.redirect("/log-in");
+        }
+        next();
+    },
+    asyncHandler(async (req, res, next) => {
+        res.render("post-form", {
+            post: null,
+            errors: null,
+        });
+    }),
+];
 
 exports.post_create_post = [
     (req, res, next) => {
